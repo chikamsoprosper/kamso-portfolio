@@ -1,0 +1,254 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Support Kamso | Personal Portfolio</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #080808;
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 15px;
+    }
+
+    .support-box {
+        width: 100%;
+        max-width: 450px;
+        padding: 35px 25px;
+        text-align: center;
+        background: linear-gradient(145deg, #151515, #080808);
+        border: 1px solid #d4af37;
+        border-radius: 20px;
+        box-shadow: 0 0 25px rgba(212, 175, 55, 0.12);
+        animation: fadeIn 1s ease-out both;
+    }
+
+    h1 {
+        color: #f5d76e;
+        font-size: 30px;
+        margin-bottom: 20px;
+        animation: fadeIn 1s ease-out both;
+    }
+
+    .intro {
+        color: #cccccc;
+        font-size: 15px;
+        line-height: 1.8;
+        margin-bottom: 25px;
+        animation: fadeIn 1s ease-out 0.2s both;
+    }
+
+    .account {
+        background: #101010;
+        border: 1px solid #5c4a18;
+        padding: 20px 15px;
+        margin: 25px 0;
+        border-radius: 14px;
+        overflow-wrap: anywhere;
+        animation: fadeIn 1s ease-out 0.4s both;
+    }
+
+    .account p {
+        line-height: 1.8;
+        margin-bottom: 18px;
+        color: #dddddd;
+    }
+
+    .account p:last-child {
+        margin-bottom: 0;
+    }
+
+    .account strong {
+        color: #d4af37;
+        font-size: 14px;
+        display: inline-block;
+        margin-bottom: 4px;
+    }
+
+    .account-number {
+        color: #f5d76e;
+        font-size: 23px;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+
+    button, .back {
+        display: inline-block;
+        width: 100%;
+        padding: 14px 18px;
+        border: 1px solid #d4af37;
+        border-radius: 10px;
+        font-weight: bold;
+        font-size: 15px;
+        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 12px;
+    }
+
+    button {
+        background: linear-gradient(135deg, #d4af37, #f5e1a4);
+        color: #080808;
+    }
+
+    button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .back {
+        background: #111111;
+        color: #f5d76e;
+    }
+
+    .back:hover {
+        background: #d4af37;
+        color: #080808;
+        transform: translateY(-3px);
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    }
+
+    #message {
+        color: #f5d76e;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-top: 15px;
+        min-height: 20px;
+    }
+
+    footer {
+        color: #777777;
+        font-size: 12px;
+        margin-top: 25px;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .support-box {
+            padding: 30px 18px;
+        }
+
+        h1 {
+            font-size: 26px;
+        }
+
+        .account-number {
+            font-size: 21px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation: none !important;
+            transition: none !important;
+        }
+    }
+</style>
+
+</head><body><main class="support-box">
+
+    <h1>💛 Support Kamso</h1>
+
+    <p class="intro">
+        Thank you for visiting my portfolio!
+        If you would like to support me, you can
+        make a transfer using my OPay details below.
+        Every bit of support is appreciated.
+    </p>
+
+    <div class="account">
+
+        <p>
+            <strong>ACCOUNT NAME</strong><br>
+            BLESSING OGUGUA EGENTI
+        </p>
+
+        <p>
+            <strong>BANK</strong><br>
+            OPay
+        </p>
+
+        <p>
+            <strong>ACCOUNT NUMBER</strong><br>
+            <span class="account-number" id="accountNumber">
+                7062720320
+            </span>
+        </p>
+
+    </div>
+
+    <button type="button" onclick="copyAccount()">
+        📋 Copy Account Number
+    </button>
+
+    <p id="message" aria-live="polite"></p>
+
+    <a class="back" href="index.html">
+        ← Back to Portfolio
+    </a>
+
+    <footer>
+        &copy; 2026 Kamso. All rights reserved.
+    </footer>
+
+</main>
+
+<script>
+    async function copyAccount() {
+        const accountNumber = "7062720320";
+        const message = document.getElementById("message");
+
+        try {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(accountNumber);
+            } else {
+                const input = document.createElement("textarea");
+                input.value = accountNumber;
+                input.style.position = "fixed";
+                input.style.left = "-9999px";
+
+                document.body.appendChild(input);
+                input.select();
+
+                const copied = document.execCommand("copy");
+                input.remove();
+
+                if (!copied) {
+                    throw new Error("Copy failed");
+                }
+            }
+
+            message.textContent =
+                "✓ Account number copied successfully!";
+
+        } catch (error) {
+            message.textContent =
+                "Copy unavailable. Please copy the account number displayed above.";
+        }
+    }
+</script>
+
+</body>
+</html>
